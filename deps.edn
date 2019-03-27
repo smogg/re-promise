@@ -1,7 +1,9 @@
-{:paths ["resources" "src" "test"]
- :deps {com.bhauman/cljs-test-display {:mvn/version "0.1.1"}
-        com.bhauman/figwheel-main #:mvn{:version "0.2.0"}
-        org.clojure/clojure {:mvn/version "1.10.0"}
-        org.clojure/clojurescript #:mvn{:version "1.10.520"}
-        reagent {:mvn/version "0.8.1"}
-        re-frame {:mvn/version "0.10.5"}}}
+{:paths ["resources" "src"]
+ :deps {org.clojure/clojure {:mvn/version "1.10.0"}
+        org.clojure/clojurescript {:mvn/version "1.10.520"}
+        re-frame {:mvn/version "0.10.5"}}
+ :aliases {:test {:main-opts ["-m" "figwheel.main" "-b" "dev"]
+                  :extra-paths ["test"]
+                  :extra-deps {org.clojure/test.check {:mvn/version "0.9.0"}
+                               com.bhauman/cljs-test-display {:mvn/version "0.1.1"}
+                               com.bhauman/figwheel-main {:mvn/version "0.2.0"}}}}}
