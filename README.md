@@ -1,10 +1,12 @@
 
 
-## Promises For re-frame handlers
+## Promise effect handler for re-frame
 
 This re-frame library adds an [Effect Handler](https://github.com/Day8/re-frame/blob/develop/docs/EffectfulHandlers.md) supporting Javascript Promises.
 
 Keyed `:promise`, it translate a simple map into promise call with a `then` and a `catch` firing provided re-frame handlers.
+
+This library is heavily inspired by [re-frame-http-fx](https://github.com/Day8/re-frame-http-fx)
 
 ## Quick Start Guide
 
