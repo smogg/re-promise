@@ -45,5 +45,5 @@ In the namespace where you register your event handlers, perhaps called `events.
                :on-success [:your-success-handler "some-str"]
                ;; :your-failure-handler will receive the passed arguments as
                ;; well ass the error as last argument passed to your handler fn
-               :on-failure [:your-failure-handler {:some-map}]}}))
+               :on-failure [:your-failure-handler {:some :map}]}}))
 ```
