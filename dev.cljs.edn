@@ -1,0 +1,8 @@
+^{:watch-dirs ["src" "test"]
+  :extra-main-files {:tests {:main re-promise.test-runner}}
+  :auto-testing true
+  :open-url "http://localhost:9500/figwheel-extra-main/tests"}
+{:main re-promise.core
+ :output-to "resources/public/app.js"
+ :output-dir "resources/public/compiled/app.out"
+ :asset-path "/compiled/app.out"}
