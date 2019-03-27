@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+[[ "${CLOJARS_USERNAME}" = ""  ]] && { echo >&2 "CLOJARS_USERNAME has to be set"; exit 1; }
+[[ "${CLOJARS_PASSWORD}" = ""  ]] && { echo >&2 "CLOJARS_PASSWORD has to be set"; exit 1; }
+
+# generate pom.xml
+clj -Spom
+
+# build uberjar
+clj -A:pack
+
+# deploy to clojars
+clj -A:deploy
