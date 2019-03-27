@@ -22,3 +22,4 @@ resources/public/app-auto-testing.js
 resources/public/app-tests.js
 resources/public/app.js
 .cpcache
+dist
