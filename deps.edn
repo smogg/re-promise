@@ -5,10 +5,12 @@
  :aliases {:test {:main-opts ["-m" "figwheel.main" "-b" "dev"]
                   :extra-paths ["test"]
                   :extra-deps {org.clojure/test.check {:mvn/version "0.9.0"}
-                                 com.bhauman/cljs-test-display {:mvn/version "0.1.1"}
-                                 com.bhauman/figwheel-main {:mvn/version "0.2.0"}}}
+                               com.bhauman/cljs-test-display {:mvn/version "0.1.1"}
+                               com.bhauman/figwheel-main {:mvn/version "0.2.0"}}}
            :deploy {:extra-deps {deps-deploy {:mvn/version "RELEASE"}}
                     :main-opts ["-m" "deps-deploy.deps-deploy" "deploy" "dist/re-promise.jar"]}
            :pack {:extra-deps {pack/pack.alpha {:git/url "https://github.com/juxt/pack.alpha.git"
                                                 :sha "81b9e47d992b17aa3e3af1a47aed1f0287ebe9b8"}}
-                  :main-opts ["-m" "mach.pack.alpha.skinny" "--no-libs" "--project-path" "dist/re-promise.jar"]}}}
+                  :main-opts ["-m" "mach.pack.alpha.skinny" "--no-libs" "--project-path" "dist/re-promise.jar"]}
+           :garamond {:main-opts ["-m" "garamond.main"]
+                      :extra-deps {com.workframe/garamond {:mvn/version "0.4.0"}}}}}
