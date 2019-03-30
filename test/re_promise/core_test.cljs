@@ -4,8 +4,12 @@
             [re-promise.core :as core]))
 
 (reg-event-fx ::promise-test
-  (fn [_world [_ val]]
+  (fn [_ [_ val]]
     {:promise val}))
+
+(reg-event-fx ::promise-n-test
+  (fn [_ [_ val]]
+    {:promise-n val}))
 
 (reg-event-db ::good-promise
   (fn [db [_ done data promise-response]]
@@ -14,11 +18,6 @@
     (done)
     db))
 
-(deftest test-successful-promise
-  (async done
-    (dispatch [::promise-test {:call #(js/Promise.resolve :good)
-                               :on-success [::good-promise done "So good"]}])))
-
 (reg-event-db ::bad-promise
   (fn [db [_ done data error]]
     (is (= "So bad" data) "expected: data passed through")
@@ -26,7 +25,33 @@
     (done)
     db))
 
+(deftest test-successful-promise
+  (async done
+    (dispatch [::promise-test {:call #(js/Promise.resolve :good)
+                               :on-success [::good-promise done "So good"]}])))
+
 (deftest test-failing-promise
   (async done
     (dispatch [::promise-test {:call #(js/Promise.reject :bad)
                                :on-failure [::bad-promise done "So bad"]}])))
+
+(deftest test-on-failure-n
+  (async done
+    (dispatch [::promise-test {:call #(js/Promise.reject :bad)
+                               :on-failure-n [[::bad-promise (fn []) "So bad"]
+                                              [::bad-promise done "So bad"]]}])))
+
+(deftest test-on-success-n
+  (async done
+    (dispatch [::promise-test {:call #(js/Promise.resolve :good)
+                               :on-success-n [[::good-promise (fn []) "So good"]
+                                              [::good-promise done "So good"]]}])))
+
+(deftest test-promise-n
+  (async done
+    (dispatch [::promise-n-test [{:call #(js/Promise.reject :bad)
+                                  :on-failure [::bad-promise (fn []) "So bad"]}
+                                 {:call #(js/Promise.reject :bad)
+                                  :on-failure [::bad-promise (fn []) "So bad"]}
+                                 {:call #(js/Promise.resolve :good)
+                                  :on-success [::good-promise done "So good"]}]])))
