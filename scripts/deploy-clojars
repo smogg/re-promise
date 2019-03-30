@@ -3,8 +3,9 @@
 [[ "${CLOJARS_USERNAME}" = ""  ]] && { echo >&2 "CLOJARS_USERNAME has to be set"; exit 1; }
 [[ "${CLOJARS_PASSWORD}" = ""  ]] && { echo >&2 "CLOJARS_PASSWORD has to be set"; exit 1; }
 
-# generate pom.xml
-clj -Spom
+# Increment the patch level of the version tag, generate a new pom.xml with the
+# new version, and create a git tag based on that commit
+clojure -A:garamond patch --tag --pom --scm-url "https://github.com/smogg/re-promise"
 
 # build uberjar
 clj -A:pack
