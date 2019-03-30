@@ -47,11 +47,16 @@
                                :on-success-n [[::good-promise (fn []) "So good"]
                                               [::good-promise done "So good"]]}])))
 
-(deftest test-promise-n
+(deftest test-promise-n-failures
   (async done
     (dispatch [::promise-n-test [{:call #(js/Promise.reject :bad)
                                   :on-failure [::bad-promise (fn []) "So bad"]}
                                  {:call #(js/Promise.reject :bad)
-                                  :on-failure [::bad-promise (fn []) "So bad"]}
+                                  :on-failure [::bad-promise done "So bad"]}]])))
+
+(deftest test-promise-n-succeeding
+  (async done
+    (dispatch [::promise-n-test [{:call #(js/Promise.resolve :good)
+                                  :on-failure [::good-promise (fn []) "So good"]}
                                  {:call #(js/Promise.resolve :good)
-                                  :on-success [::good-promise done "So good"]}]])))
+                                  :on-failure [::good-promise done "So good"]}]])))
